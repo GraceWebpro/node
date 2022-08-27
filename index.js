@@ -1,16 +1,17 @@
 // Importing express module
-const express = require('express');
-const app = express();
- 
-// Getting Request
-app.get('/', (req, res) => {
- 
-    // Sending the response
-    res.send('Hello World!')
-    
-    // Ending the response
-    res.end()
-})
+const app = require('./app')
+const { MongoClient, ServerApiVersion } = require('mongodb');
+
+
+const uri = "mongodb+srv://new-user1:grace@cluster0.8ddaq.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+
+
  
 // Establishing the port
 const PORT = process.env.PORT ||5000;
